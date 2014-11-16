@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" ng-app="contactManagerApp">
+  <head>
+  
+  	<title>Angular CMS</title>
+	
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	
+	<!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    
+    
+    <script>
+		angular.module('contactManagerApp', [])
+	  .controller('ContactController', ['$scope', function($scope) {
+		$scope.contacts = [
+		  {id: 1, name:'Dee', email:"dee@alwayssunny.com"},
+		  {id: 2, name:' Charley', email:"charley@alwayssunny.com"},
+		  {id: 3, name:'Mac', email:"mac@alwayssunny.com"},
+		  {id: 4, name:'Frank', email:"frank@alwayssunny.com"}
+		];
+		$scope.currId = 5;
+	 
+		$scope.addContact = function() {
+		  $scope.contacts.push({id:$scope.currId, name:$scope.nameText, age:$scope.emailText});
+		  $scope.currId = $scope.currId + 1;
+		  $scope.nameText = '';
+		  $scope.ageText = '';
+		};
+	 
+		$scope.deleteAll = function() {
+		  $scope.contacts = [];
+		};
+	  }]);
+	</script>
+	<style>
+		.top-padding {
+			margin-top: 10px;
+		}
+	</style>
+  </head>
+	<body>
+	<div class="container">
+		
+		<div class="page-header">
+			<h1>Angular Contact Management System</h1>
+		</div>
+		
+		
+		
+		
+		<div ng-controller="ContactController">
+			<button class="btn btn-danger" href="" ng-click="deleteAll()">Delete All <span class='glyphicon glyphicon-minus'></span></button>
+			
+			<table class="table table-striped">
+				<thead>
+					<tr><th>Name</th><th>Email</th></tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="contact in contacts">
+						<td>{{contact.name}}</td>
+						<td>{{contact.email}}</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<form class="form" role="form" ng-submit="addContact()">
+				<div class="row">
+					<div class="col-md-4">
+						<label>Name</label>
+						<input class="form-control" type="text" ng-model="nameText"
+						placeholder="add new contact here">
+					</div>   
+					<div class="col-md-4">
+						<label>Email</label>
+						<input class="form-control" type="text" ng-model="emailText"
+						placeholder="add new age here">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 top-padding">
+						<button class="btn btn-primary" type="submit">Add Contact <span class='glyphicon glyphicon-plus'></span></button>
+					</div>	
+				</div>
+			</form>
+		</div>
+		
+		
+		
+	</div>
+	</body>
+</html>
